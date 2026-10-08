@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internações - Gestão Hospitalar</title>
+
+    <link rel="stylesheet" href="css/comum.css">
+    <link rel="stylesheet" href="css/cadastro.css">
+    <link rel="stylesheet" href="css/internacoes.css">
+</head>
+
+<body>
+
+    <div id="sidebar"></div>
+
+    <main class="main">
+
+        <div class="page-header">
+
+            <div>
+                <h1>Internações</h1>
+                <p>Gerenciamento dos pacientes internados.</p>
+            </div>
+
+            <button class="btn-primary" type="button" onclick="abrirModal()" aria-haspopup="dialog" aria-controls="modal">
+                + Nova internação
+            </button>
+
+        </div>
+
+        <div class="cards">
+
+            <div class="card">
+                <span>Pacientes internados</span>
+                <strong>18</strong>
+            </div>
+
+            <div class="card">
+                <span>Altas previstas</span>
+                <strong>5</strong>
+            </div>
+
+            <div class="card">
+                <span>Novas internações</span>
+                <strong>3</strong>
+            </div>
+
+        </div>
+
+        <div class="box">
+
+            <h2>Pacientes internados</h2>
+
+            <table id="tabelaInternacoes">
+
+                <thead>
+                    <tr>
+                        <th scope="col">Paciente</th>
+                        <th scope="col">Quarto</th>
+                        <th scope="col">Leito</th>
+                        <th scope="col">Data de entrada</th>
+                        <th scope="col">Médico responsável</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Ações</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td>Ana Silva</td>
+                        <td>201</td>
+                        <td>A</td>
+                        <td>06/10/2026</td>
+                        <td>Dr. Carlos Oliveira</td>
+                        <td>
+                            <span class="status confirmado">
+                                Internado
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>João Santos</td>
+                        <td>203</td>
+                        <td>B</td>
+                        <td>05/10/2026</td>
+                        <td>Dra. Maria Santos</td>
+                        <td>
+                            <span class="status confirmado">
+                                Internado
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Lucas Oliveira</td>
+                        <td>105</td>
+                        <td>A</td>
+                        <td>07/10/2026</td>
+                        <td>Dr. Pedro Almeida</td>
+                        <td>
+                            <span class="status aguardando">
+                                Alta prevista
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Mariana Costa</td>
+                        <td>302</td>
+                        <td>B</td>
+                        <td>04/10/2026</td>
+                        <td>Dra. Ana Souza</td>
+                        <td>
+                            <span class="status confirmado">
+                                Internado
+                            </span>
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </main>
+
+    <dialog id="modal" class="cadastro-modal" aria-labelledby="cadastro-titulo" aria-describedby="cadastro-descricao">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="cadastro-titulo">Nova internação</h2>
+                <button type="button" onclick="fecharModal()" aria-label="Fechar formulário">×</button>
+            </div>
+            <p id="cadastro-descricao" class="cadastro-descricao">Informe os dados de entrada e a acomodação do paciente.</p>
+            <p class="cadastro-obrigatorios">Campos com * são obrigatórios.</p>
+            <form id="form-cadastro">
+                <div class="form">
+                    <div class="campo">
+                        <label for="paciente">Paciente <span aria-hidden="true">*</span></label>
+                        <select id="paciente" name="paciente" required >
+                            <option value="">Selecione...</option>
+                            <option value="Ana Silva">Ana Silva</option>
+                            <option value="João Santos">João Santos</option>
+                            <option value="Lucas Oliveira">Lucas Oliveira</option>
+                            <option value="Mariana Costa">Mariana Costa</option>
+                        </select>
+                    </div>
+                    <div class="campo">
+                        <label for="medico">Médico responsável <span aria-hidden="true">*</span></label>
+                        <select id="medico" name="medico" required >
+                            <option value="">Selecione...</option>
+                            <option value="Dr. Carlos Oliveira">Dr. Carlos Oliveira</option>
+                            <option value="Dra. Maria Santos">Dra. Maria Santos</option>
+                            <option value="Dr. Pedro Almeida">Dr. Pedro Almeida</option>
+                            <option value="Dra. Ana Souza">Dra. Ana Souza</option>
+                        </select>
+                    </div>
+                    <div class="campo">
+                        <label for="quarto">Quarto <span aria-hidden="true">*</span></label>
+                        <input id="quarto" name="quarto" type="text" required placeholder="Ex.: 204" maxlength="10">
+                    </div>
+                    <div class="campo">
+                        <label for="leito">Leito <span aria-hidden="true">*</span></label>
+                        <input id="leito" name="leito" type="text" required placeholder="Ex.: A" maxlength="10">
+                    </div>
+                    <div class="campo">
+                        <label for="entrada">Data de entrada <span aria-hidden="true">*</span></label>
+                        <input id="entrada" name="entrada" type="date" required placeholder="" >
+                    </div>
+                    <div class="campo">
+                        <label for="status">Status <span aria-hidden="true">*</span></label>
+                        <select id="status" name="status" required >
+                            <option value="">Selecione...</option>
+                            <option value="Internado">Internado</option>
+                            <option value="Alta prevista">Alta prevista</option>
+                        </select>
+                    </div>
+                </div>
+                <p id="cadastro-erro" class="cadastro-erro" role="alert" hidden></p>
+                <div class="modal-footer">
+                    <button type="button" class="btn-cancelar" onclick="fecharModal()">Cancelar</button>
+                    <button type="submit" class="btn-primary">Cadastrar internação</button>
+                </div>
+            </form>
+        </div>
+    </dialog>
+    <div id="cadastro-feedback" class="cadastro-feedback" role="status" hidden></div>
+
+    <dialog id="modal-detalhes" class="cadastro-modal" aria-labelledby="detalhes-titulo">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="detalhes-titulo">Detalhes</h2>
+                <button type="button" onclick="fecharDetalhes()" aria-label="Fechar detalhes">×</button>
+            </div>
+            <p class="cadastro-descricao">Confira as informações do registro selecionado.</p>
+            <dl id="detalhes-conteudo" class="detalhes-grid"></dl>
+            <div class="modal-footer">
+                <button type="button" class="btn-cancelar" onclick="fecharDetalhes()">Fechar</button>
+                <button type="button" id="editar-detalhes" class="btn-primary">Editar registro</button>
+            </div>
+        </div>
+    </dialog>
+
+    <script src="js/index.js"></script>
+    <script src="js/cadastro.js"></script>
+    <script src="js/internacoes.js"></script>
+
+</body>
+
+</html>

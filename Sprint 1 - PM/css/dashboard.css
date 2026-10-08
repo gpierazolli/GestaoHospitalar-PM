@@ -1,0 +1,96 @@
+/* Estilos de dashboard. */
+
+.topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.topo h1 {
+    font-size: 28px;
+    margin-bottom: 6px;
+    color: #333;
+}
+
+.topo p {
+    color: #888;
+    font-size: 14px;
+}
+
+.usuario {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.usuario strong {
+    display: block;
+    font-size: 14px;
+}
+
+.usuario small {
+    color: #888;
+    font-size: 12px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #e8f5e9;
+    color: #4caf50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.card-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 9px;
+    background-color: #e8f5e9;
+    color: #4caf50;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 21px;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+}
+
+.resumo {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.resumo-item {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.resumo-item span {
+    color: #777;
+    font-size: 13px;
+}
+
+.resumo-item strong {
+    font-size: 18px;
+    color: #4caf50;
+}
+
+/* Ajustes para telas menores. */
+
+@media (max-width: 1000px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}

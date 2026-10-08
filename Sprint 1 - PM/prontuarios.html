@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prontuários - Gestão Hospitalar</title>
+
+    <link rel="stylesheet" href="css/comum.css">
+    <link rel="stylesheet" href="css/cadastro.css">
+    <link rel="stylesheet" href="css/prontuarios.css">
+</head>
+
+<body>
+
+    <div id="sidebar"></div>
+
+    <main class="main">
+
+        <div class="page-header">
+
+            <div>
+                <h1>Prontuários</h1>
+                <p>Histórico e informações médicas dos pacientes.</p>
+            </div>
+
+        </div>
+
+        <div class="toolbar">
+
+            <div class="search-box">
+                <input
+                    type="text"
+                    placeholder="Pesquisar paciente..."
+                >
+            </div>
+
+        </div>
+
+        <div class="box">
+
+            <h2>Prontuários dos pacientes</h2>
+
+            <table id="tabelaProntuarios">
+
+                <thead>
+                    <tr>
+                        <th scope="col">Paciente</th>
+                        <th scope="col">CPF</th>
+                        <th scope="col">Data de nascimento</th>
+                        <th scope="col">Última consulta</th>
+                        <th scope="col">Médico responsável</th>
+                        <th scope="col">Ações</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td>Ana Silva</td>
+                        <td>123.456.789-00</td>
+                        <td>15/04/1998</td>
+                        <td>08/10/2026</td>
+                        <td>Dr. Carlos Oliveira</td>
+                        <td>
+                            <button class="action-button">
+                                Ver prontuário
+                            </button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>João Santos</td>
+                        <td>987.654.321-00</td>
+                        <td>20/08/1985</td>
+                        <td>08/10/2026</td>
+                        <td>Dra. Maria Santos</td>
+                        <td>
+                            <button class="action-button">
+                                Ver prontuário
+                            </button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Lucas Oliveira</td>
+                        <td>456.789.123-00</td>
+                        <td>10/02/2001</td>
+                        <td>07/10/2026</td>
+                        <td>Dr. Pedro Almeida</td>
+                        <td>
+                            <button class="action-button">
+                                Ver prontuário
+                            </button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Mariana Costa</td>
+                        <td>321.654.987-00</td>
+                        <td>05/11/1992</td>
+                        <td>06/10/2026</td>
+                        <td>Dra. Ana Souza</td>
+                        <td>
+                            <button class="action-button">
+                                Ver prontuário
+                            </button>
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </main>
+
+    <dialog id="modal" class="cadastro-modal" aria-labelledby="cadastro-titulo" aria-describedby="cadastro-descricao">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="cadastro-titulo">Editar prontuário</h2>
+                <button type="button" onclick="fecharModal()" aria-label="Fechar formulário">×</button>
+            </div>
+            <p id="cadastro-descricao" class="cadastro-descricao">Atualize as informações do prontuário.</p>
+            <p class="cadastro-obrigatorios">Campos com * são obrigatórios.</p>
+            <form id="form-cadastro">
+                <div class="form">
+                    <div class="campo">
+                        <label for="paciente">Paciente *</label>
+                        <input id="paciente" name="paciente" required maxlength="120">
+                    </div>
+                    <div class="campo">
+                        <label for="cpf">CPF *</label>
+                        <input id="cpf" name="cpf" required inputmode="numeric" maxlength="14" pattern="[0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2}">
+                    </div>
+                    <div class="campo">
+                        <label for="nascimento">Data de nascimento *</label>
+                        <input id="nascimento" name="nascimento" type="date" required>
+                    </div>
+                    <div class="campo">
+                        <label for="ultimaConsulta">Última consulta *</label>
+                        <input id="ultimaConsulta" name="ultimaConsulta" type="date" required>
+                    </div>
+                    <div class="campo">
+                        <label for="medico">Médico responsável *</label>
+                        <select id="medico" name="medico" required>
+                            <option value="">Selecione...</option>
+                            <option>Dr. Carlos Oliveira</option>
+                            <option>Dra. Maria Santos</option>
+                            <option>Dr. Pedro Almeida</option>
+                            <option>Dra. Ana Souza</option>
+                        </select>
+                    </div>
+                    <div class="campo campo-largo">
+                        <label for="observacoes">Observações</label>
+                        <textarea id="observacoes" name="observacoes" rows="4" maxlength="3000" placeholder="Registre as observações do prontuário"></textarea>
+                    </div>
+                </div>
+                <p id="cadastro-erro" class="cadastro-erro" role="alert" hidden></p>
+                <div class="modal-footer">
+                    <button type="button" class="btn-cancelar" onclick="fecharModal()">Cancelar</button>
+                    <button type="submit" class="btn-primary">Salvar alterações</button>
+                </div>
+            </form>
+        </div>
+    </dialog>
+    <div id="cadastro-feedback" class="cadastro-feedback" role="status" hidden></div>
+
+    <dialog id="modal-detalhes" class="cadastro-modal" aria-labelledby="detalhes-titulo">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="detalhes-titulo">Detalhes</h2>
+                <button type="button" onclick="fecharDetalhes()" aria-label="Fechar detalhes">×</button>
+            </div>
+            <p class="cadastro-descricao">Confira as informações do registro selecionado.</p>
+            <dl id="detalhes-conteudo" class="detalhes-grid"></dl>
+            <div class="modal-footer">
+                <button type="button" class="btn-cancelar" onclick="fecharDetalhes()">Fechar</button>
+                <button type="button" id="editar-detalhes" class="btn-primary">Editar registro</button>
+            </div>
+        </div>
+    </dialog>
+
+    <script src="js/index.js"></script>
+    <script src="js/cadastro.js"></script>
+    <script src="js/prontuarios.js"></script>
+
+</body>
+
+</html>

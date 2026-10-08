@@ -1,0 +1,206 @@
+/* Estilos de cadastro. */
+
+.modal-content {
+    background-color: white;
+    width: 500px;
+    border-radius: 10px;
+    padding: 25px;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.modal-header h2 {
+    font-size: 20px;
+}
+
+.modal-header button {
+    border: none;
+    background: none;
+    font-size: 25px;
+    color: #888;
+    cursor: pointer;
+}
+
+.form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 25px;
+}
+
+.cadastro-modal {
+    margin: auto;
+    border: none;
+    border-radius: 10px;
+    background: white;
+    color: #333;
+    width: min(580px, calc(100% - 32px));
+    max-height: calc(100dvh - 32px);
+    overflow-y: auto;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.cadastro-modal::backdrop {
+    background-color: rgba(0, 0, 0, 0.35);
+}
+
+.cadastro-aberto {
+    overflow: hidden;
+}
+
+.cadastro-modal .modal-content {
+    width: 100%;
+    padding: 28px;
+}
+
+.cadastro-modal .modal-header {
+    margin-bottom: 8px;
+}
+
+.cadastro-descricao {
+    color: #777;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 12px;
+}
+
+.cadastro-obrigatorios {
+    color: #777;
+    font-size: 12px;
+    margin-bottom: 24px;
+}
+
+.cadastro-modal .campo {
+    min-width: 0;
+}
+
+.cadastro-modal .campo input,
+.cadastro-modal .campo select {
+    width: 100%;
+    min-width: 0;
+    min-height: 42px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: white;
+    color: #333;
+    font: inherit;
+    font-size: 14px;
+}
+
+.cadastro-modal .campo input[readonly] {
+    background: #f7faf8;
+    color: #666;
+}
+
+.cadastro-modal .campo input:focus,
+.cadastro-modal .campo select:focus {
+    border-color: #4caf50;
+    outline: 2px solid #e8f5e9;
+}
+
+.cadastro-modal button:focus-visible {
+    outline: 2px solid #388e3c;
+    outline-offset: 3px;
+}
+
+.cadastro-modal .modal-footer {
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
+
+.cadastro-erro {
+    color: #c62828;
+    font-size: 13px;
+    margin-top: 18px;
+    line-height: 1.5;
+}
+
+.cadastro-feedback {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    max-width: min(400px, calc(100% - 32px));
+    padding: 16px 20px;
+    border: 1px solid #c8e6c9;
+    border-radius: 8px;
+    background: #e8f5e9;
+    color: #256029;
+    font-size: 14px;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* Ajustes para telas menores. */
+
+@media (max-width: 600px) {
+    .cadastro-modal .form {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .cadastro-modal .modal-content {
+        padding: 20px;
+    }
+
+    .cadastro-modal .modal-footer {
+        flex-wrap: wrap;
+    }
+}
+
+/* Informações do registro selecionado. */
+.detalhes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    margin: 24px 0;
+}
+
+.detalhes-grid dt {
+    color: #777;
+    font-size: 12px;
+    margin-bottom: 7px;
+}
+
+.detalhes-grid dd {
+    font-size: 14px;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
+}
+
+.campo-largo {
+    grid-column: 1 / -1;
+}
+
+.cadastro-modal .campo textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font: inherit;
+    font-size: 14px;
+    resize: vertical;
+}
+
+.cadastro-modal .campo textarea:focus {
+    outline: 2px solid #e8f5e9;
+    border-color: #4caf50;
+}
+
+@media (max-width: 600px) {
+    .detalhes-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+}

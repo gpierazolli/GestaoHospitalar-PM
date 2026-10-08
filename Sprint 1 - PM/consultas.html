@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultas - Gestão Hospitalar</title>
+
+    <link rel="stylesheet" href="css/comum.css">
+    <link rel="stylesheet" href="css/cadastro.css">
+    <link rel="stylesheet" href="css/consultas.css">
+</head>
+
+<body>
+
+    <div id="sidebar"></div>
+
+    <main class="main">
+
+        <div class="page-header">
+
+        <div>
+            <h1>Consultas</h1>
+            <p>Gerenciamento das consultas do hospital.</p>
+        </div>
+
+        <button class="btn-primary" type="button" onclick="abrirModal()" aria-haspopup="dialog" aria-controls="modal">
+            + Nova consulta
+        </button>
+
+</div>
+
+        <div class="search-box">
+
+            <input
+                type="text"
+                placeholder="Pesquisar por paciente ou médico..."
+            >
+
+        </div>
+
+        <div class="box">
+
+            <h2>Consultas agendadas</h2>
+
+            <table id="tabelaConsultas">
+
+                <thead>
+                    <tr>
+                        <th scope="col">Paciente</th>
+                        <th scope="col">Médico</th>
+                        <th scope="col">Especialidade</th>
+                        <th scope="col">Data</th>
+                        <th scope="col">Horário</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Ações</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td>Ana Silva</td>
+                        <td>Dr. Carlos Oliveira</td>
+                        <td>Clínica Geral</td>
+                        <td>08/10/2026</td>
+                        <td>08:30</td>
+                        <td>
+                            <span class="status confirmado">
+                                Confirmada
+                            </span>
+                        </td>
+                        <td>
+                            <button class="action-button">
+                                Visualizar
+                            </button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>João Santos</td>
+                        <td>Dra. Maria Santos</td>
+                        <td>Cardiologia</td>
+                        <td>08/10/2026</td>
+                        <td>09:00</td>
+                        <td>
+                            <span class="status aguardando">
+                                Aguardando
+                            </span>
+                        </td>
+                        <td>
+                            <button class="action-button">
+                                Visualizar
+                            </button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Lucas Oliveira</td>
+                        <td>Dr. Pedro Almeida</td>
+                        <td>Ortopedia</td>
+                        <td>08/10/2026</td>
+                        <td>10:30</td>
+                        <td>
+                            <span class="status confirmado">
+                                Confirmada
+                            </span>
+                        </td>
+                        <td>
+                            <button class="action-button">
+                                Visualizar
+                            </button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Mariana Costa</td>
+                        <td>Dra. Ana Souza</td>
+                        <td>Pediatria</td>
+                        <td>08/10/2026</td>
+                        <td>14:00</td>
+                        <td>
+                            <span class="status cancelado">
+                                Cancelada
+                            </span>
+                        </td>
+                        <td>
+                            <button class="action-button">
+                                Visualizar
+                            </button>
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </main>
+
+    <dialog id="modal" class="cadastro-modal" aria-labelledby="cadastro-titulo" aria-describedby="cadastro-descricao">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="cadastro-titulo">Nova consulta</h2>
+                <button type="button" onclick="fecharModal()" aria-label="Fechar formulário">×</button>
+            </div>
+            <p id="cadastro-descricao" class="cadastro-descricao">Selecione o paciente e o médico para agendar a consulta.</p>
+            <p class="cadastro-obrigatorios">Campos com * são obrigatórios.</p>
+            <form id="form-cadastro">
+                <div class="form">
+                    <div class="campo">
+                        <label for="paciente">Paciente <span aria-hidden="true">*</span></label>
+                        <select id="paciente" name="paciente" required >
+                            <option value="">Selecione...</option>
+                            <option value="Ana Silva">Ana Silva</option>
+                            <option value="João Santos">João Santos</option>
+                            <option value="Lucas Oliveira">Lucas Oliveira</option>
+                            <option value="Mariana Costa">Mariana Costa</option>
+                        </select>
+                    </div>
+                    <div class="campo">
+                        <label for="medico">Médico <span aria-hidden="true">*</span></label>
+                        <select id="medico" name="medico" required >
+                            <option value="">Selecione...</option>
+                            <option value="Dr. Carlos Oliveira">Dr. Carlos Oliveira</option>
+                            <option value="Dra. Maria Santos">Dra. Maria Santos</option>
+                            <option value="Dr. Pedro Almeida">Dr. Pedro Almeida</option>
+                            <option value="Dra. Ana Souza">Dra. Ana Souza</option>
+                        </select>
+                    </div>
+                    <div class="campo">
+                        <label for="especialidade">Especialidade <span aria-hidden="true">*</span></label>
+                        <input id="especialidade" name="especialidade" type="text" required placeholder="" readonly>
+                    </div>
+                    <div class="campo">
+                        <label for="status">Status <span aria-hidden="true">*</span></label>
+                        <select id="status" name="status" required >
+                            <option value="">Selecione...</option>
+                            <option value="Confirmada">Confirmada</option>
+                            <option value="Aguardando">Aguardando</option>
+                            <option value="Cancelada">Cancelada</option>
+                        </select>
+                    </div>
+                    <div class="campo">
+                        <label for="data">Data da consulta <span aria-hidden="true">*</span></label>
+                        <input id="data" name="data" type="date" required placeholder="" >
+                    </div>
+                    <div class="campo">
+                        <label for="horario">Horário <span aria-hidden="true">*</span></label>
+                        <input id="horario" name="horario" type="time" required placeholder="" >
+                    </div>
+                </div>
+                <p id="cadastro-erro" class="cadastro-erro" role="alert" hidden></p>
+                <div class="modal-footer">
+                    <button type="button" class="btn-cancelar" onclick="fecharModal()">Cancelar</button>
+                    <button type="submit" class="btn-primary">Cadastrar consulta</button>
+                </div>
+            </form>
+        </div>
+    </dialog>
+    <div id="cadastro-feedback" class="cadastro-feedback" role="status" hidden></div>
+
+    <dialog id="modal-detalhes" class="cadastro-modal" aria-labelledby="detalhes-titulo">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="detalhes-titulo">Detalhes</h2>
+                <button type="button" onclick="fecharDetalhes()" aria-label="Fechar detalhes">×</button>
+            </div>
+            <p class="cadastro-descricao">Confira as informações do registro selecionado.</p>
+            <dl id="detalhes-conteudo" class="detalhes-grid"></dl>
+            <div class="modal-footer">
+                <button type="button" class="btn-cancelar" onclick="fecharDetalhes()">Fechar</button>
+                <button type="button" id="editar-detalhes" class="btn-primary">Editar registro</button>
+            </div>
+        </div>
+    </dialog>
+
+    <script src="js/index.js"></script>
+    <script src="js/cadastro.js"></script>
+    <script src="js/consultas.js"></script>
+
+</body>
+
+</html>

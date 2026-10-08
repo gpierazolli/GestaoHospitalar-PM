@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Gestão Hospitalar</title>
+    <link rel="stylesheet" href="css/comum.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body>
+
+    <div id="sidebar"></div>
+
+    <main class="main">
+
+        <header class="topo">
+
+            <div>
+                <h1>Olá, usuário!</h1>
+                <p>Aqui está o resumo do sistema hospitalar.</p>
+            </div>
+
+            <div class="usuario">
+
+                <div class="avatar">
+                    U
+                </div>
+
+                <div>
+                    <strong>Usuário</strong>
+                    <small>Administrador</small>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <div class="cards">
+
+            <div class="card">
+
+                <div class="card-icon">
+                    ♙
+                </div>
+
+                <div>
+                    <span>Pacientes</span>
+                    <h2>248</h2>
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon">
+                    □
+                </div>
+
+                <div>
+                    <span>Consultas hoje</span>
+                    <h2>32</h2>
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon">
+                    ⚕
+                </div>
+
+                <div>
+                    <span>Médicos</span>
+                    <h2>45</h2>
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon">
+                    ▣
+                </div>
+
+                <div>
+                    <span>Internações</span>
+                    <h2>18</h2>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="dashboard-grid">
+
+            <div class="box">
+
+                <div class="box-header">
+                    <h2>Consultas de hoje</h2>
+                    <button class="link-button" type="button" onclick="window.location.href='consultas.html'">
+                        Ver todas
+                    </button>
+                </div>
+
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Horário</th>
+                            <th>Paciente</th>
+                            <th>Médico</th>
+                            <th>Status</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+                            <td>08:00</td>
+                            <td>Ana Silva</td>
+                            <td>Dr. Carlos</td>
+                            <td>
+                                <span class="status confirmado">
+                                    Confirmada
+                                </span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>09:30</td>
+                            <td>João Santos</td>
+                            <td>Dra. Maria</td>
+                            <td>
+                                <span class="status aguardando">
+                                    Aguardando
+                                </span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>10:30</td>
+                            <td>Lucas Oliveira</td>
+                            <td>Dr. Pedro</td>
+                            <td>
+                                <span class="status confirmado">
+                                    Confirmada
+                                </span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>11:00</td>
+                            <td>Mariana Costa</td>
+                            <td>Dra. Ana</td>
+                            <td>
+                                <span class="status cancelada">
+                                    Cancelada
+                                </span>
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            <div class="box">
+
+                <div class="box-header">
+                    <h2>Internações</h2>
+                </div>
+
+                <div class="resumo">
+
+                    <div class="resumo-item">
+                        <span>Pacientes internados</span>
+                        <strong>18</strong>
+                    </div>
+
+                    <div class="resumo-item">
+                        <span>Altas previstas</span>
+                        <strong>5</strong>
+                    </div>
+
+                    <div class="resumo-item">
+                        <span>Novas internações</span>
+                        <strong>3</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <script src="js/index.js"></script>
+    <script src="js/dashboard.js"></script>
+
+</body>
+
+</html>

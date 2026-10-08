@@ -1,0 +1,4 @@
+/* O registro profissional permanece inteiro na tabela. */
+#tabelaMedicos td:nth-child(2) {
+    white-space: nowrap;
+}

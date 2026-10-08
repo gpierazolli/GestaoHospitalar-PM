@@ -1,0 +1,6 @@
+/* Datas e CPF permanecem inteiros na tabela. */
+#tabelaProntuarios td:nth-child(2),
+#tabelaProntuarios td:nth-child(3),
+#tabelaProntuarios td:nth-child(4) {
+    white-space: nowrap;
+}
