@@ -3,7 +3,15 @@ package com.hospital.model;
 import com.hospital.enums.StatusConsulta;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
 
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "tipo")
+@JsonSubTypes({
+    @JsonSubTypes.Type(value = ConsultaRotina.class, name = "rotina"),
+    @JsonSubTypes.Type(value = ConsultaEspecializada.class, name = "especializada"),
+    @JsonSubTypes.Type(value = AtendimentoEmergencia.class, name = "emergencia")
+})
 public abstract class Consulta {
     protected Long id;
     protected LocalDate data;

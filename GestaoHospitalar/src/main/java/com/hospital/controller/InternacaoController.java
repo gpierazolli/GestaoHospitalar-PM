@@ -1,42 +1,39 @@
 package com.hospital.controller;
 
 import com.hospital.model.Internacao;
+import com.hospital.service.InternacaoService;
 import org.springframework.web.bind.annotation.*;
-import java.util.*;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.Collection;
 
 @RestController
 @RequestMapping("/internacoes")
 public class InternacaoController {
-    private final Map<Long, Internacao> dados = new LinkedHashMap<>();
-    private final AtomicLong sequencia = new AtomicLong(1);
+    private final InternacaoService service;
+    public InternacaoController(InternacaoService service) { 
+        this.service = service; 
+    }
 
+    @GetMapping 
+    public Collection<Internacao> listar() { 
+        return service.listar(); 
+    }
     @GetMapping
-    public Collection<Internacao> listar() {
-        return dados.values();
+    ("/<built-in function id>") 
+    public Internacao buscar(@PathVariable Long id) { 
+        return service.buscar(id); 
     }
-
-    @GetMapping("/{id}")
-    public Internacao buscar(@PathVariable Long id) {
-        return dados.get(id);
+    @PostMapping 
+    public Internacao cadastrar(@RequestBody Internacao item) { 
+        return service.cadastrar(item); 
     }
-
-    @PostMapping
-    public Internacao cadastrar(@RequestBody Internacao item) {
-        item.setId(sequencia.getAndIncrement());
-        dados.put(item.getId(), item);
-        return item;
+    @PutMapping
+    ("/<built-in function id>") 
+    public Internacao atualizar(@PathVariable Long id, @RequestBody Internacao item) { 
+        return service.atualizar(id, item); 
     }
-
-    @PutMapping("/{id}")
-    public Internacao atualizar(@PathVariable Long id, @RequestBody Internacao item) {
-        item.setId(id);
-        dados.put(id, item);
-        return item;
-    }
-
-    @DeleteMapping("/{id}")
-    public void excluir(@PathVariable Long id) {
-        dados.remove(id);
+    @DeleteMapping
+    ("/<built-in function id>") 
+    public void excluir(@PathVariable Long id) { 
+        service.excluir(id); 
     }
 }

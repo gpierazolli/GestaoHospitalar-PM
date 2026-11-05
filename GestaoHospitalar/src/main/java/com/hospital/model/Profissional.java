@@ -1,5 +1,14 @@
 package com.hospital.model;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "tipo")
+@JsonSubTypes({
+    @JsonSubTypes.Type(value = MedicoClinico.class, name = "clinico"),
+    @JsonSubTypes.Type(value = MedicoEspecialista.class, name = "especialista"),
+    @JsonSubTypes.Type(value = Cirurgiao.class, name = "cirurgiao")
+})
 public abstract class Profissional {
     protected Long id;
     protected String nome;

@@ -18,6 +18,20 @@ public class ProcedimentoCirurgico {
     private LocalTime horarioReal;
     private StatusCirurgia status = StatusCirurgia.AGENDADO;
 
+    public boolean iniciar() {
+        if (status != StatusCirurgia.AGENDADO) return false;
+        status = StatusCirurgia.EM_ANDAMENTO;
+        dataReal = LocalDate.now();
+        horarioReal = LocalTime.now();
+        return true;
+    }
+
+    public boolean cancelar() {
+        if (status == StatusCirurgia.CONCLUIDO || status == StatusCirurgia.CANCELADO) return false;
+        status = StatusCirurgia.CANCELADO;
+        return true;
+    }
+
     public boolean concluir() {
         if (status != StatusCirurgia.EM_ANDAMENTO) {
             return false;

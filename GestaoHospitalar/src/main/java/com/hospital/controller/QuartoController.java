@@ -1,42 +1,37 @@
 package com.hospital.controller;
 
 import com.hospital.model.Quarto;
+import com.hospital.service.QuartoService;
 import org.springframework.web.bind.annotation.*;
-import java.util.*;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.Collection;
 
 @RestController
 @RequestMapping("/quartos")
 public class QuartoController {
-    private final Map<Long, Quarto> dados = new LinkedHashMap<>();
-    private final AtomicLong sequencia = new AtomicLong(1);
-
-    @GetMapping
-    public Collection<Quarto> listar() {
-        return dados.values();
+    private final QuartoService service;
+    public QuartoController(QuartoService service) { 
+        this.service = service; 
     }
 
-    @GetMapping("/{id}")
-    public Quarto buscar(@PathVariable Long id) {
-        return dados.get(id);
+    @GetMapping 
+    public Collection<Quarto> listar() { 
+        return service.listar(); 
     }
-
-    @PostMapping
-    public Quarto cadastrar(@RequestBody Quarto item) {
-        item.setId(sequencia.getAndIncrement());
-        dados.put(item.getId(), item);
-        return item;
+    @GetMapping("/<built-in function id>") 
+    public Quarto buscar(@PathVariable Long id) { 
+        return service.buscar(id); 
     }
-
-    @PutMapping("/{id}")
-    public Quarto atualizar(@PathVariable Long id, @RequestBody Quarto item) {
-        item.setId(id);
-        dados.put(id, item);
-        return item;
+    @PostMapping 
+    public Quarto cadastrar(@RequestBody Quarto item) { 
+        return service.cadastrar(item); 
     }
-
-    @DeleteMapping("/{id}")
-    public void excluir(@PathVariable Long id) {
-        dados.remove(id);
+    @PutMapping
+    ("/<built-in function id>") 
+    public Quarto atualizar(@PathVariable Long id, @RequestBody Quarto item) { 
+        return service.atualizar(id, item); 
+    }
+    @DeleteMapping("/<built-in function id>") 
+    public void excluir(@PathVariable Long id) { 
+        service.excluir(id); 
     }
 }
