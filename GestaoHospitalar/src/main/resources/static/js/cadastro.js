@@ -19,7 +19,7 @@ function abrirModal() {
 }
 
 function fecharModal() {
-  modal.close();
+  if (!botaoSalvar.disabled) modal.close();
 }
 
 function limparFormulario() {
@@ -49,7 +49,7 @@ function fecharAoClicarFora(evento) {
 function mostrarErro(texto, campo) {
   mensagemErro.textContent = texto;
   mensagemErro.hidden = false;
-  campo.focus();
+  campo?.focus();
 }
 
 function validarFormulario() {
@@ -112,6 +112,9 @@ function aplicarMascaraTelefone(evento) {
 
 modal.addEventListener("close", limparFormulario);
 modal.addEventListener("click", fecharAoClicarFora);
+modal.addEventListener("cancel", function (evento) {
+  if (botaoSalvar.disabled) evento.preventDefault();
+});
 
 
 function prepararEdicao(registro, titulo) {
@@ -162,3 +165,66 @@ modalDetalhes.addEventListener("click", function (evento) {
         fecharDetalhes();
     }
 });
+
+async function requisitarCadastro(recurso, opcoes) {
+  const resposta = await fetch(recurso, opcoes).catch(() => {
+    throw new Error("Não foi possível conectar ao servidor. Tente novamente.");
+  });
+  if (!resposta.ok) {
+    const problema = await resposta.json().catch(() => null);
+    throw new Error(problema?.detail || "Não foi possível concluir a operação. Confira os dados e tente novamente.");
+  }
+  return resposta.json();
+}
+
+async function iniciarListagem(carregar) {
+  const botaoNovo = document.querySelector("main button[aria-controls='modal']");
+  botaoNovo.disabled = true;
+  try {
+    await carregar();
+    botaoNovo.disabled = false;
+  } catch (erro) {
+    const aviso = document.getElementById("listagem-erro");
+    aviso.textContent = "Não foi possível carregar os cadastros. Recarregue a página para tentar novamente.";
+    aviso.hidden = false;
+    console.error(erro);
+  }
+}
+
+function preencherOpcoes(campo, registros, rotulo) {
+  campo.options.length = 1;
+  for (const registro of registros) {
+    campo.add(new Option(rotulo(registro), registro.id));
+  }
+}
+
+function especialidadeProfissional(profissional) {
+  if (profissional.tipo === "clinico") return "Clínica Geral";
+  return profissional.especialidade || profissional.areaCirurgica || "";
+}
+
+async function salvarRegistro(recurso, dados, tabela, preencherLinha, atualizarListagem) {
+  if (botaoSalvar.disabled) return;
+  const linhaEmEdicao = registroEmEdicao;
+  botaoSalvar.disabled = true;
+  let registro;
+  try {
+    registro = await requisitarCadastro(linhaEmEdicao ? recurso + "/" + linhaEmEdicao.registro.id : recurso, {
+      method: linhaEmEdicao ? "PUT" : "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(dados),
+    });
+  } catch (erro) {
+    mostrarErro(erro.message);
+    return;
+  } finally {
+    botaoSalvar.disabled = false;
+  }
+  preencherLinha(linhaEmEdicao || tabela.insertRow(), registro);
+  atualizarListagem();
+  if (linhaEmEdicao) {
+    mostrarSucesso("Alterações salvas com sucesso.");
+  } else {
+    mostrarSucesso();
+  }
+}

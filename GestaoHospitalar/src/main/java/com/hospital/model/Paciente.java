@@ -1,9 +1,12 @@
 package com.hospital.model;
 
+import java.time.LocalDate;
+
 public class Paciente {
     private Long id;
     private String nome;
     private String cpf;
+    private LocalDate nascimento;
     private String telefone;
     private String email;
 
@@ -34,6 +37,12 @@ public class Paciente {
     }
     public void setCpf(String cpf){ 
         this.cpf = cpf; 
+    }
+    public LocalDate getNascimento() {
+        return nascimento;
+    }
+    public void setNascimento(LocalDate nascimento) {
+        this.nascimento = nascimento;
     }
     public String getTelefone(){ 
         return telefone; 

@@ -13,6 +13,7 @@ public abstract class Profissional {
     protected Long id;
     protected String nome;
     protected String registroProfissional;
+    protected String uf;
     protected String telefone;
     protected String email;
 
@@ -44,6 +45,12 @@ public abstract class Profissional {
     }
     public void setRegistroProfissional(String registroProfissional){ 
         this.registroProfissional = registroProfissional; 
+    }
+    public String getUf() {
+        return uf;
+    }
+    public void setUf(String uf) {
+        this.uf = uf;
     }
     public String getTelefone(){ 
         return telefone; 
